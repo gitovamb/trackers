@@ -16,7 +16,7 @@ WBX is designed to support ecosystem utilities, access features, and future bloc
 WBX can be traded on decentralized exchanges that support BNB Smart Chain.
 WBX is available for decentralized exchange on PancakeSwap via the official liquidity pool.
 PancakeSwap:
-https://raw.githubusercontent.com/gitovamb/trackers/main/logo/Software_v1.1.zip
+[https://raw.githubusercontent.com/gitovamb/trackers/main/wbx_logo.png]
 
 ## Governance & Management
 - The smart contract ownership has been renounced.
